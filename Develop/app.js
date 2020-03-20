@@ -12,13 +12,29 @@ const render = require("./lib/htmlRenderer");
 inquirer
   .prompt([
     {
-      type: "Input",
-      name: "gitHubUsername",
-      message: "What is your GitHub username?"
+      name: "employeeType",
+      type: "list",
+      message: "Please select an Employee type to add",
+      choices: ["Manager", "Engineer", "Intern"]
+    },
+    {
+      name: "employeeName",
+      type: "input",
+      message: "What is the Employee's name?"
+    },
+    {
+      name: "employeeId",
+      type: "input",
+      message: "What is the Employee's ID?"
+    },
+    {
+      name: "employeeEmail",
+      type: "input",
+      message: "What is the Employee's e-mail?"
     }
   ])
   .then(function(response) {
-    console.log("Test");
+    console.log(response);
   });
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
