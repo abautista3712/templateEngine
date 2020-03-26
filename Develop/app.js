@@ -34,10 +34,45 @@ function createTeam() {
         message: "What is the Employee's e-mail?"
       }
     ])
-    .then(function(response) {
-      console.log("Employee information has been inputted by user");
-      render();
+    .then(response => {
+      if (response.employeeType == "Manager") {
+        createManager();
+      } else if (response.employeeType == "Engineer") {
+        createEngineer();
+      } else if (response.employeeType == "Intern") {
+        createIntern();
+      }
     });
+}
+
+function createManager() {
+  inquirer.prompt([
+    {
+      name: "officeNumber",
+      type: "input",
+      message: "What is the Manager's office number?"
+    }
+  ]);
+}
+
+function createEngineer() {
+  inquirer.prompt([
+    {
+      name: "github",
+      type: "input",
+      message: "What is the Engineer's GitHub?"
+    }
+  ]);
+}
+
+function createIntern() {
+  inquirer.prompt([
+    {
+      name: "school",
+      type: "input",
+      message: "What is the Intern's school?"
+    }
+  ]);
 }
 
 createTeam();
