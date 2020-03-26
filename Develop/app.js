@@ -16,7 +16,7 @@ function createTeam() {
         name: "employeeType",
         type: "list",
         message: "Please select an Employee type to add",
-        choices: ["Manager", "Engineer", "Intern"]
+        choices: ["Manager", "Engineer", "Intern", "Done"]
       },
       {
         name: "employeeName",
@@ -53,6 +53,7 @@ function createTeam() {
     });
 }
 
+let employees = [];
 function createManager(employeeInfo) {
   inquirer
     .prompt([
@@ -72,8 +73,11 @@ function createManager(employeeInfo) {
         employeeEmail,
         officeNumber
       );
+      employees.push(newManager);
+      console.log(employees);
+      createTeam();
 
-      console.log(newManager);
+      // console.log(newManager);
     });
 }
 
@@ -96,8 +100,11 @@ function createEngineer(employeeInfo) {
         employeeEmail,
         github
       );
+      employees.push(newEngineer);
+      console.log(employees);
+      createTeam();
 
-      console.log(newEngineer);
+      // console.log(newEngineer);
     });
 }
 
@@ -120,8 +127,11 @@ function createIntern(employeeInfo) {
         employeeEmail,
         school
       );
+      employees.push(newIntern);
+      console.log(employees);
+      createTeam();
 
-      console.log(newIntern);
+      // console.log(newIntern);
     });
 }
 
