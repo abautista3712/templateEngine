@@ -16,7 +16,7 @@ function createTeam() {
         name: "employeeType",
         type: "list",
         message: "Please select an Employee type to add",
-        choices: ["Manager", "Engineer", "Intern", "Done"]
+        choices: ["Manager", "Engineer", "Intern"]
       },
       {
         name: "employeeName",
@@ -61,7 +61,8 @@ function createManager(employeeInfo) {
         name: "officeNumber",
         type: "input",
         message: "What is the Manager's office number?"
-      }
+      },
+      { name: "done", type: "confirm", message: "Finished adding employees?" }
     ])
     .then(response => {
       const { employeeName, employeeId, employeeEmail } = employeeInfo;
@@ -74,10 +75,11 @@ function createManager(employeeInfo) {
         officeNumber
       );
       employees.push(newManager);
-      console.log(employees);
-      createTeam();
-
-      // console.log(newManager);
+      if (response.done) {
+        finishedAdding();
+      } else {
+        createTeam();
+      }
     });
 }
 
@@ -88,7 +90,8 @@ function createEngineer(employeeInfo) {
         name: "github",
         type: "input",
         message: "What is the Engineer's GitHub?"
-      }
+      },
+      { name: "done", type: "confirm", message: "Finished adding employees?" }
     ])
     .then(response => {
       const { employeeName, employeeId, employeeEmail } = employeeInfo;
@@ -101,10 +104,11 @@ function createEngineer(employeeInfo) {
         github
       );
       employees.push(newEngineer);
-      console.log(employees);
-      createTeam();
-
-      // console.log(newEngineer);
+      if (response.done) {
+        finishedAdding();
+      } else {
+        createTeam();
+      }
     });
 }
 
@@ -115,7 +119,8 @@ function createIntern(employeeInfo) {
         name: "school",
         type: "input",
         message: "What is the Intern's school?"
-      }
+      },
+      { name: "done", type: "confirm", message: "Finished adding employees?" }
     ])
     .then(response => {
       const { employeeName, employeeId, employeeEmail } = employeeInfo;
@@ -128,11 +133,16 @@ function createIntern(employeeInfo) {
         school
       );
       employees.push(newIntern);
-      console.log(employees);
-      createTeam();
-
-      // console.log(newIntern);
+      if (response.done) {
+        finishedAdding();
+      } else {
+        createTeam();
+      }
     });
+}
+
+function finishedAdding() {
+  console.log(employees);
 }
 
 createTeam();
