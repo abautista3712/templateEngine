@@ -35,44 +35,94 @@ function createTeam() {
       }
     ])
     .then(response => {
-      if (response.employeeType == "Manager") {
-        createManager();
-      } else if (response.employeeType == "Engineer") {
-        createEngineer();
-      } else if (response.employeeType == "Intern") {
-        createIntern();
+      const { employeeType } = response;
+
+      switch (employeeType) {
+        case "Manager":
+          createManager(response);
+          break;
+        case "Engineer":
+          createEngineer(response);
+          break;
+        case "Intern":
+          createIntern(response);
+          break;
+        default:
+          break;
       }
     });
 }
 
-function createManager() {
-  inquirer.prompt([
-    {
-      name: "officeNumber",
-      type: "input",
-      message: "What is the Manager's office number?"
-    }
-  ]);
+function createManager(employeeInfo) {
+  inquirer
+    .prompt([
+      {
+        name: "officeNumber",
+        type: "input",
+        message: "What is the Manager's office number?"
+      }
+    ])
+    .then(response => {
+      const { employeeName, employeeId, employeeEmail } = employeeInfo;
+      const { officeNumber } = response;
+
+      let newManager = new Manager(
+        employeeName,
+        employeeId,
+        employeeEmail,
+        officeNumber
+      );
+
+      console.log(newManager);
+    });
 }
 
-function createEngineer() {
-  inquirer.prompt([
-    {
-      name: "github",
-      type: "input",
-      message: "What is the Engineer's GitHub?"
-    }
-  ]);
+function createEngineer(employeeInfo) {
+  inquirer
+    .prompt([
+      {
+        name: "github",
+        type: "input",
+        message: "What is the Engineer's GitHub?"
+      }
+    ])
+    .then(response => {
+      const { employeeName, employeeId, employeeEmail } = employeeInfo;
+      const { github } = response;
+
+      let newEngineer = new Engineer(
+        employeeName,
+        employeeId,
+        employeeEmail,
+        github
+      );
+
+      console.log(newEngineer);
+    });
 }
 
-function createIntern() {
-  inquirer.prompt([
-    {
-      name: "school",
-      type: "input",
-      message: "What is the Intern's school?"
-    }
-  ]);
+function createIntern(employeeInfo) {
+  inquirer
+    .prompt([
+      {
+        name: "school",
+        type: "input",
+        message: "What is the Intern's school?"
+      }
+    ])
+    .then(response => {
+      const { employeeName, employeeId, employeeEmail } = employeeInfo;
+      const { school } = response;
+
+      let newIntern = new Intern(
+        employeeName,
+        employeeId,
+        employeeEmail,
+        school
+      );
+
+      console.log(newIntern);
+    });
 }
 
 createTeam();
