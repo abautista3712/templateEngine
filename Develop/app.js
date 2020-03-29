@@ -142,7 +142,9 @@ function createIntern(employeeInfo) {
 }
 
 function finishedAdding() {
-  console.log(employees);
+  fs.writeFile(outputPath, render(employees), (err, data) => {
+    console.log("Team has been created successfully!");
+  });
 }
 
 createTeam();
